@@ -1,5 +1,7 @@
 <script setup>
 defineProps({
+  id: Number,
+  article: Number,
   imageUrl: String,
   title: String,
   price: Number,
@@ -15,7 +17,7 @@ defineProps({
     class="relative bg-white border border-slate-200 rounded-3xl p-8 cursor-pointer hover:-translate-y-2 transition duration-150 ease-out hover:shadow-xl"
   >
     <button @click="onClickFavorite" class="absolute left-6 top-6">
-      <img :src="isFavorite ? '/svg/heart-liked.svg' : '/svg/heart-unliked.svg'" alt="Liked" />
+      <img :src="isFavorite ? 'svg/heart-liked.svg' : 'svg/heart-unliked.svg'" alt="Liked" />
     </button>
     <img :src="imageUrl" alt="" />
     <p class="mt-2 mb-4">{{ title }}</p>
@@ -26,7 +28,7 @@ defineProps({
         <b>{{ price?.toLocaleString('RU-ru') }} руб.</b>
       </div>
       <button @click="onClickAdd">
-        <img :src="isAdded ? '/svg/checked.svg' : '/svg/plus.svg'" alt="" />
+        <img :src="isAdded ? 'svg/checked.svg' : 'svg/plus.svg'" alt="" />
       </button>
     </div>
   </div>

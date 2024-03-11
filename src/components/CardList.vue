@@ -4,29 +4,34 @@ import Card from './Card.vue'
 defineProps({
   items: Array
 })
+const emit = defineEmits(['addToFavorite', 'addToCart'])
 
-const onCLickAdd = () => {
-  console.log('Добавлен в корзину')
+const onClickFavorite = (item) => {
+  emit('addToFavorite', item)
 }
 
-const onCLickFavorite = () => {
-  console.log('Добавлен в избранное')
+const onCLickAdd = (item) => {
+  emit('addToCart', item)
 }
 </script>
 
 <template>
   <div
     v-if="items.length"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xs:grid-cols-4 gap-10"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
   >
     <Card
       v-for="item in items"
       :key="item.id"
+      :id="item.id"
+      :article="item.article"
       :image-url="item.img"
       :title="item.title"
       :price="item.price"
-      :onClickAdd="onCLickAdd"
-      :onClickFavorite="onCLickFavorite"
+      :onClickAdd="() => onCLickAdd(item)"
+      :onClickFavorite="() => onClickFavorite(item)"
+      :isFavorite="item.isFavorite"
+      :isAdded="item.isAdded"
     />
   </div>
   <div v-else class="flex items-center justify-center">

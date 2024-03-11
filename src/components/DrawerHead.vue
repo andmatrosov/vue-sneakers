@@ -1,5 +1,6 @@
 <template>
   <svg
+    @click="closeDrawer"
     fill="none"
     width="16"
     height="14"
@@ -24,3 +25,9 @@
   </svg>
   <h2 class="text-2xl font-extrabold">Корзина</h2>
 </template>
+
+<script setup>
+import { inject } from 'vue'
+
+const { closeDrawer } = inject('cardAction')
+</script>
