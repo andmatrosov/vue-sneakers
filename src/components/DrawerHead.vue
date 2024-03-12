@@ -1,3 +1,9 @@
+<script setup>
+import { inject } from 'vue'
+
+const { closeDrawer } = inject('cart')
+</script>
+
 <template>
   <svg
     @click="closeDrawer"
@@ -25,9 +31,3 @@
   </svg>
   <h2 class="text-2xl font-extrabold">Корзина</h2>
 </template>
-
-<script setup>
-import { inject } from 'vue'
-
-const { closeDrawer } = inject('cardAction')
-</script>

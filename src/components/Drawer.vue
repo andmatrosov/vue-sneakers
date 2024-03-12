@@ -1,6 +1,18 @@
 <script setup>
 import Header from './DrawerHead.vue'
 import CartList from './CartList.vue'
+import InfoBlock from './InfoBlock.vue'
+import { inject } from 'vue'
+import { computed } from 'vue'
+
+const props = defineProps({
+  totalPrice: Number,
+  vatPrice: Number,
+  isLoading: Boolean
+})
+
+const { closeDrawer } = inject('cart')
+const emit = defineEmits(['createOrder'])
 </script>
 
 <template>
@@ -10,26 +22,36 @@ import CartList from './CartList.vue'
       <div class="flex items-center gap-5 mb-5">
         <Header />
       </div>
+
+      <InfoBlock
+        v-if="!totalPrice"
+        title="Ваша корзина пуста"
+        description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+        imageURL="./svg/empty-cart.svg"
+        :btnAction="closeDrawer"
+      />
+
       <CartList />
 
-      <div class="flex flex-col gap-1 mt-7">
+      <div v-if="totalPrice" class="flex flex-col gap-1 mt-7">
         <div class="flex gap-2">
           <span>Итого</span>
           <div class="flex-1 border-b border-dashed mb-1"></div>
-          <b>12 999 руб</b>
+          <b>{{ totalPrice.toLocaleString('RU-ru') }} руб</b>
         </div>
         <div class="flex gap-2">
           <span>Налог 5%</span>
           <div class="flex-1 border-b border-dashed mb-1"></div>
-          <b>12 999 руб</b>
+          <b>{{ vatPrice.toLocaleString('RU-ru') }} руб</b>
         </div>
 
         <button
-          disabled
+          @click="() => emit('createOrder')"
+          :disabled="totalPrice && !isLoading ? false : true"
           class="bg-lime-500 w-full mt-7 rounded-xl py-3 font-bold text-white hover:bg-lime-600 active:bg-lime-700 cursor-pointer transition disabled:bg-slate-300 disabled:cursor-auto"
           type="button"
         >
-          Оформить заказ
+          {{ isLoading ? 'Загрузка...' : 'Оформить заказ' }}
         </button>
       </div>
     </div>

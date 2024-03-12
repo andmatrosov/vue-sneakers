@@ -13,7 +13,7 @@
         @click="() => emit('openDrawer')"
       >
         <img src="/svg/cart.svg" alt="Cart" />
-        <span>1209 руб.</span>
+        <span>{{ totalPrice }} руб.</span>
       </li>
       <li class="flex items-center gap-3 text-gray-500 cursor-pointer hover:text-black">
         <img src="/svg/favorite.svg" alt="Favorites" />
@@ -29,4 +29,7 @@
 
 <script setup>
 const emit = defineEmits(['openDrawer'])
+defineProps({
+  totalPrice: Number
+})
 </script>
