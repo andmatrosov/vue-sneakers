@@ -6,7 +6,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'vue-sneakers',
+  // publicPath: process.env.NODE_ENV === 'production' ? '/vue-sneakers/' : '/',
+  base: '/vue-sneakers',
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {

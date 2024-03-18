@@ -31,7 +31,27 @@ const addToCart = (item) => {
 const removeFromCart = (item) => {
   cartItems.value.splice(cartItems.value.indexOf(item), 1)
   item.isAdded = false
-  console.log(item)
+}
+
+const addToFavorite = async (item) => {
+  try {
+    if (!item.isFavorite) {
+      item.isFavorite = true
+      const { data } = await axios.post('https://64463e36842f32ae.mokky.dev/favorites', item)
+
+      item.favoriteId = data.id
+    } else {
+      item.isFavorite = false
+      await axios.delete(
+        `https://64463e36842f32ae.mokky.dev/favorites/${
+          item.favoriteId ? item.favoriteId : item.id
+        }`
+      )
+      item.favoriteId = null
+    }
+  } catch (err) {
+    console.log('Error: ', err)
+  }
 }
 
 const createOrder = async () => {
@@ -72,7 +92,8 @@ provide('cart', {
   closeDrawer,
   openDrawer,
   addToCart,
-  removeFromCart
+  removeFromCart,
+  addToFavorite
 })
 /* Корзина (END) */
 </script>
@@ -90,8 +111,7 @@ provide('cart', {
     <Header :total-price="totalPrice" @open-drawer="openDrawer" />
 
     <div class="p-10">
-      <!-- <router-view></router-view> -->
-      <HomeView />
+      <router-view></router-view>
     </div>
   </div>
 </template>

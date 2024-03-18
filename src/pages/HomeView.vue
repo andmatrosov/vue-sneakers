@@ -3,7 +3,7 @@ import { reactive, watch, inject, ref, onMounted, provide } from 'vue'
 import axios from 'axios'
 import CardList from '../components/CardList.vue'
 
-const { cartItems, addToCart, removeFromCart } = inject('cart')
+const { cartItems, addToCart, removeFromCart, addToFavorite } = inject('cart')
 
 const items = ref([])
 
@@ -25,23 +25,6 @@ const onClickAddCart = (item) => {
     addToCart(item)
   } else {
     removeFromCart(item)
-  }
-}
-
-const addToFavorite = async (item) => {
-  try {
-    if (!item.isFavorite) {
-      item.isFavorite = true
-      const { data } = await axios.post('https://64463e36842f32ae.mokky.dev/favorites', item)
-
-      item.favoriteId = data.id
-    } else {
-      item.isFavorite = false
-      await axios.delete(`https://64463e36842f32ae.mokky.dev/favorites/${item.favoriteId}`)
-      item.favoriteId = null
-    }
-  } catch (err) {
-    console.log('Error: ', err)
   }
 }
 
@@ -115,8 +98,8 @@ watch(filters, fetchItems)
 </script>
 
 <template>
-  <div class="flex justify-between items-center">
-    <h2 class="text-3xl font-bold mb-8">Все кроссовки</h2>
+  <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center lg:mb-8">
+    <h2 class="text-3xl font-bold mb-4 lg:mb-0">Все кроссовки</h2>
 
     <div class="flex gap-4">
       <select @change="onChangeSelect" class="py-2 px-3 border rounded-md" name="" id="">
