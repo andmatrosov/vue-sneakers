@@ -28,9 +28,14 @@
           <span>Закладки</span>
         </router-link>
       </li>
-      <li class="flex items-center gap-3 text-gray-500 cursor-pointer hover:text-black">
-        <img src="/svg/user.svg" alt="Profile" />
-        <span>Профиль</span>
+      <li>
+        <router-link
+          to="/profile"
+          class="flex items-center gap-3 text-gray-500 cursor-pointer hover:text-black"
+        >
+          <img src="/svg/user.svg" alt="Profile" />
+          <span>Профиль</span>
+        </router-link>
       </li>
     </ul>
   </header>

@@ -101,7 +101,7 @@ watch(filters, fetchItems)
   <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center lg:mb-8">
     <h2 class="text-3xl font-bold mb-4 lg:mb-0">Все кроссовки</h2>
 
-    <div class="flex gap-4">
+    <div class="flex gap-4 flex-col md:flex-row w-full md:w-auto">
       <select @change="onChangeSelect" class="py-2 px-3 border rounded-md" name="" id="">
         <option value="title" checked>По названию</option>
         <option value="price">По цене(дешевые)</option>
@@ -112,7 +112,7 @@ watch(filters, fetchItems)
         <img src="/svg/search.svg" class="absolute top-3.5 left-3.5" alt="" />
         <input
           @input="onChangeInput"
-          class="border rounded-md py-2 pl-10 pr-4 outline-none focus:border-gray-400"
+          class="border rounded-md py-2 pl-10 pr-4 outline-none focus:border-gray-400 w-full"
           type="text"
           placeholder="Поиск..."
         />

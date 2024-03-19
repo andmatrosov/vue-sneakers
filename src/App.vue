@@ -9,12 +9,15 @@ import Drawer from './components/Drawer.vue'
 /* Корзина (START) */
 const cartItems = ref([]),
   isDrawerOpen = ref(false),
+  isOrderCompleted = ref(false),
+  lastOrderId = ref(null),
   isCreatingOrder = ref(false),
   totalPrice = computed(() => cartItems.value.reduce((acc, item) => acc + item.price, 0)),
   vatPrice = computed(() => Math.round(totalPrice.value * 0.05))
 
 const closeDrawer = () => {
   isDrawerOpen.value = false
+  isOrderCompleted.value = false
 }
 
 const openDrawer = () => {
@@ -63,7 +66,8 @@ const createOrder = async () => {
     })
 
     cartItems.value = []
-
+    isOrderCompleted.value = true
+    lastOrderId.value = data.id
     return data
   } catch (err) {
     console.log(err)
@@ -89,6 +93,8 @@ watch(
 
 provide('cart', {
   cartItems,
+  isOrderCompleted,
+  lastOrderId,
   closeDrawer,
   openDrawer,
   addToCart,

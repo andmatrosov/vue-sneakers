@@ -11,7 +11,7 @@ const props = defineProps({
   isLoading: Boolean
 })
 
-const { closeDrawer } = inject('cart')
+const { closeDrawer, isOrderCompleted, lastOrderId } = inject('cart')
 const emit = defineEmits(['createOrder'])
 </script>
 
@@ -28,9 +28,13 @@ const emit = defineEmits(['createOrder'])
 
       <div v-if="!totalPrice" class="flex flex-col h-full justify-center items-center">
         <InfoBlock
-          title="Ваша корзина пуста"
-          description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
-          imageURL="./svg/empty-cart.svg"
+          :title="isOrderCompleted ? 'Заказ оформлен' : 'Ваша корзина пуста'"
+          :description="
+            isOrderCompleted
+              ? `Ваш заказ #${lastOrderId} скоро будет передан курьерской доставке`
+              : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'
+          "
+          :imageURL="isOrderCompleted ? './svg/complete-order.svg' : './svg/empty-cart.svg'"
           :btnAction="closeDrawer"
         />
       </div>
