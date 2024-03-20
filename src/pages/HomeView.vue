@@ -121,6 +121,11 @@ watch(filters, fetchItems)
   </div>
 
   <div class="mt-4">
-    <CardList :items="items" @add-to-favorite="addToFavorite" @add-to-cart="onClickAddCart" />
+    <CardList
+      :items="items"
+      @add-to-favorite="addToFavorite"
+      @add-to-cart="onClickAddCart"
+      is-home
+    />
   </div>
 </template>

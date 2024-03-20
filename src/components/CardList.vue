@@ -1,9 +1,14 @@
 <script setup>
 import Card from './Card.vue'
+import InfoBlock from './InfoBlock.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 defineProps({
   items: Array,
-  isProfileView: Boolean
+  isProfileView: Boolean,
+  isHome: Boolean
 })
 const emit = defineEmits(['addToFavorite', 'addToCart'])
 
@@ -13,6 +18,10 @@ const onClickFavorite = (item) => {
 
 const onCLickAdd = (item) => {
   emit('addToCart', item)
+}
+
+const onCLickBack = () => {
+  router.go(-1)
 }
 </script>
 
@@ -37,6 +46,13 @@ const onCLickAdd = (item) => {
     />
   </div>
   <div v-else class="flex items-center justify-center">
-    <p class="mt-20 text-gray-500">По вашему запросу ничего не найдено</p>
+    <InfoBlock
+      v-if="!isHome"
+      title="Закладок нет :("
+      description="Вы ещё ничего не добавляли в закладки"
+      imageURL="img/emoji-sad.png"
+      :btnAction="() => onCLickBack()"
+    />
+    <p v-else>По вашему запросу ничего не найдено</p>
   </div>
 </template>

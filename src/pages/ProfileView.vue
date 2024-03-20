@@ -1,10 +1,18 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import CardList from '../components/CardList.vue'
+import InfoBlock from '../components/InfoBlock.vue'
 
 const orders = ref([])
+
+defineProps({
+  isHome: Boolean
+})
+
+const router = useRouter()
 
 onMounted(async () => {
   const { data } = await axios.get('https://64463e36842f32ae.mokky.dev/orders')
@@ -16,7 +24,7 @@ onMounted(async () => {
   <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center lg:mb-8">
     <h2 class="text-3xl font-bold mb-4 lg:mb-0">Мои заказы</h2>
   </div>
-  <div class="flex flex-col-reverse">
+  <div v-if="orders.length > 0" class="flex flex-col-reverse">
     <div v-for="order in orders" :key="order.id" class="mb-8">
       <div>
         <div
@@ -31,5 +39,14 @@ onMounted(async () => {
         <CardList :items="order.items" is-profile-view />
       </div>
     </div>
+  </div>
+  <div v-else class="">
+    <InfoBlock
+      v-if="!isHome"
+      title="Заказов пока нет :("
+      description="Вы ещё ничего не заказывали"
+      imageURL="img/emoji-poor.png"
+      :btnAction="() => router.go(-1)"
+    />
   </div>
 </template>
