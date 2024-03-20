@@ -1,14 +1,56 @@
-# vue-sneakers
+# Vue Shop
 
-This template should help get you started developing with Vue 3 in Vite.
+![](https://github.com/andmatrosov/vue-sneakers/blob/master/preview.png)
 
-## Recommended IDE Setup
+Этот проект является учебным и предназначен для изучения основ фреймворка Vue 3, включая использование Composition API, vue-router, а также методов передачи данных между компонентами, таких как `defineProps`, `defineEmits`, `provide`, `inject`. Проект собран с использованием Vite, что обеспечивает быструю перезагрузку модулей и оптимизированную сборку.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Начало работы
 
-## Customize configuration
+Для работы с проектом убедитесь, что на вашем компьютере установлены Node.js и npm. Клонируйте репозиторий и установите зависимости, используя следующие команды:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+```bash
+git clone git@github.com:andmatrosov/vue-sneakers.git
+cd vue-sneakers
+npm install
+```
+
+## Запуск проекта с использованием Vite
+
+Vite предлагает быстрый запуск и горячую перезагрузку при разработке. Для запуска проекта на локальном сервере выполните команду:
+
+```bash
+npm run dev
+```
+
+После запуска приложение будет доступно по адресу [http://localhost:5173](http://localhost:5173) (или другому порту, если 5173 уже используется).
+
+## Основные концепции
+
+### Composition API
+
+В проекте активно используется Composition API (`script setup`) для организации логики компонентов, что позволяет эффективно работать с реактивностью (`ref`, `reactive`), отслеживать изменения (`watch`), и создавать вычисляемые свойства.
+
+### vue-router
+
+`vue-router` используется для маршрутизации и навигации в приложении, что позволяет организовать многопагинную структуру без перезагрузки страницы.
+
+### Передача данных
+
+- `defineProps` и `defineEmits` используются для объявления пропсов и событий в компонентах.
+- `provide` и `inject` позволяют передавать данные между родителем и потомками без использования пропсов.
+- `ref` и `watch` применяются для реактивности и отслеживания изменений.
+
+## Структура проекта
+
+- `src/` - исходный код приложения.
+  - `components/` - директория с компонентами Vue.
+  - `pages/` - компоненты, представляющие страницы приложения.
+  - `routers/` - настройки маршрутизатора.
+- `public/` - статические файлы (например, изображения).
+
+## Заключение
+
+Проект является отличной отправной точкой для изучения Vue 3 и современных веб-технологий. Использование Vite в качестве сборщика проекта значительно упрощает разработку и оптимизацию приложения. Надеюсь, этот проект поможет вам углубить знания и навыки в разработке на Vue 3.
 
 ## Project Setup
 
@@ -26,10 +68,4 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```

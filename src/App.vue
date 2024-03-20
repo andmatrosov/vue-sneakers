@@ -3,7 +3,6 @@ import { ref, watch, provide, computed, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import axios from 'axios'
 import Header from './components/Header.vue'
-import HomeView from './pages/HomeView.vue'
 import Drawer from './components/Drawer.vue'
 
 /* Корзина (START) */
